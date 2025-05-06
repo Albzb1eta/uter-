@@ -1,4 +1,4 @@
-<!DOCTYPE htmL>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
@@ -18,12 +18,48 @@
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       margin-top: 20px;
+      cursor: pointer;
+    }
+    .packa {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .packa.show {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
   <h1>Vítejte na webu!</h1>
   <p>Dnes je úterý.</p>
-  <img src="fotolia_14003950-768x512.jpg" alt="Růžový květ">
+
+  <img id="klikniObrazek" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pink_rose_flower.jpg/800px-Pink_rose_flower.jpg" alt="Růžový květ">
+
+  <!-- Otisk packy -->
+  <img id="packa" class="packa" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Paw-print.svg/1024px-Paw-print.svg.png" alt="Psí packa">
+
+  <!-- Zvuk štěkání -->
+  <audio id="stek" src="https://www.soundjay.com/animal/dog-bark-1.mp3"></audio>
+
+  <script>
+    const obrazek = document.getElementById('klikniObrazek');
+    const packa = document.getElementById('packa');
+    const stek = document.getElementById('stek');
+
+    obrazek.addEventListener('click', () => {
+      stek.play();
+      packa.classList.add('show');
+      setTimeout(() => {
+        packa.classList.remove('show');
+      }, 1000); // Zmizí po 1 sekundě
+    });
+  </script>
 </body>
 </html>

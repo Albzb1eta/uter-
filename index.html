@@ -9,6 +9,8 @@
       background-color: #ffc0cb;
       text-align: center;
       padding: 50px;
+      position: relative;
+      overflow: hidden;
     }
     h1 {
       color: #ff66cc;
@@ -21,18 +23,10 @@
       cursor: pointer;
     }
     .packa {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
+      position: absolute;
+      width: 60px;
       pointer-events: none;
-      z-index: 999;
-    }
-    .packa.show {
-      opacity: 1;
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
@@ -40,25 +34,31 @@
   <h1>Vítejte na webu!</h1>
   <p>Dnes je úterý.</p>
 
-  <img id="klikniObrazek" src="data:image/jpeg;base64,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" alt="Růžový květ">
-
-  <!-- Otisk packy -->
-  <img id="packa" class="packa" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Paw-print.svg/1024px-Paw-print.svg.png" alt="Psí packa">
+  <!-- Původní obrázek -->
+  <img id="klikniObrazek" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pink_rose_flower.jpg/800px-Pink_rose_flower.jpg" alt="Růžový květ">
 
   <!-- Zvuk štěkání -->
   <audio id="stek" src="https://www.soundjay.com/animal/dog-bark-1.mp3"></audio>
 
   <script>
     const obrazek = document.getElementById('klikniObrazek');
-    const packa = document.getElementById('packa');
     const stek = document.getElementById('stek');
 
-    obrazek.addEventListener('click', () => {
+    obrazek.addEventListener('click', (e) => {
       stek.play();
-      packa.classList.add('show');
+
+      const packa = document.createElement('img');
+      packa.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Paw-print.svg/1024px-Paw-print.svg.png';
+      packa.classList.add('packa');
+      packa.style.top = `${e.clientY}px`;
+      packa.style.left = `${e.clientX}px`;
+
+      document.body.appendChild(packa);
+
+      // Po 2 sekundách packu odstraníme
       setTimeout(() => {
-        packa.classList.remove('show');
-      }, 1000); // Zmizí po 1 sekundě
+        packa.remove();
+      }, 2000);
     });
   </script>
 </body>

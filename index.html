@@ -5,28 +5,54 @@
   <title>Vítejte na mém webu</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #ffc0cb;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffb6c1, #ffe4e1);
       text-align: center;
       padding: 50px;
       position: relative;
       overflow: hidden;
     }
+
     h1 {
-      color: #ff66cc;
+      color: #d63384;
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px white;
     }
+
+    p {
+      color: #6c3483;
+      font-size: 1.2em;
+    }
+
     img {
       max-width: 300px;
       border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
       margin-top: 20px;
       cursor: pointer;
+      transition: transform 0.3s ease;
     }
+
+    img:hover {
+      transform: scale(1.05);
+    }
+
     .packa {
       position: absolute;
-      width: 60px;
+      width: 80px;
       pointer-events: none;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+      animation: packaAnim 0.4s ease-out forwards;
+      z-index: 1000;
+    }
+
+    @keyframes packaAnim {
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
     }
   </style>
 </head>
@@ -34,28 +60,31 @@
   <h1>Vítejte na webu!</h1>
   <p>Dnes je úterý.</p>
 
-  <!-- Původní obrázek -->
-  <img id="klikniObrazek" src="fotolia_14003950-768x512.jpg" alt="Růžový květ">
+  <!-- Obrázek růžového květu -->
+  <img id="klikniObrazek" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Pink_rose_flower.jpg/800px-Pink_rose_flower.jpg" alt="Růžový květ">
 
   <!-- Zvuk štěkání -->
-  <audio id="stek" src="dog-barking-101729.mp3"></audio>
+  <audio id="stek" src="https://www.soundjay.com/animal/dog-bark-1.mp3"></audio>
 
   <script>
     const obrazek = document.getElementById('klikniObrazek');
     const stek = document.getElementById('stek');
 
     obrazek.addEventListener('click', (e) => {
+      // Spuštění zvuku
+      stek.currentTime = 0;
       stek.play();
 
+      // Vytvoření packy
       const packa = document.createElement('img');
-      packa.src = 'png-clipart-animal-paw-print-dog-paw-printing-paws-animals-pet-thumbnail.png';
+      packa.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Paw-print.svg/1024px-Paw-print.svg.png';
       packa.classList.add('packa');
       packa.style.top = `${e.clientY}px`;
       packa.style.left = `${e.clientX}px`;
 
       document.body.appendChild(packa);
 
-      // Po 2 sekundách packu odstraníme
+      // Automatické odstranění packy po 2 sekundách
       setTimeout(() => {
         packa.remove();
       }, 2000);
